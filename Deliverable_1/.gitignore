@@ -1,5 +1,5 @@
-# # Ignore compiled Java class files
+# Ignore compiled Java class files
 *.class
 
-# # Ignore Maven and Gradle directories and files
+# Ignore antlr directories and files
 /.antlr/
