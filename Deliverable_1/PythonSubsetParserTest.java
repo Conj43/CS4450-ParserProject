@@ -12,25 +12,23 @@ public class PythonSubsetParserTest {
         return;
     }
 
-    String file = args[0]; //this is the argument provided when runnning this file
+    String file = args[0]; // python file passed as argument when running java code
     try{
     
-    String data = new String(File.readAllBytes(Paths.get(file))); //grabs all the data from the file
+    CharStream input = CharStreams.fromFileName(file);  //grabs all the input from the file
 
-    CharStream fileData = CharStreams.fromString(data); //we use a CharStream which is included in the antlr library
 
-    PythonSubsetLexer lexer = new PythonSubsetLexer(charStream); //makes the lexer from the charStream
+    deliverable1Lexer lexer = new deliverable1Lexer(input); //makes the lexer from the charStream
 
     CommonTokenStream stream = new CommonTokenStream(lexer);  //this gives us our tokens needed for creating the parser
 
-    PythonSubsetParser parser = new PythonSubsetParser(parser);
+    deliverable1Parser parser = new deliverable1Parser(stream); 
 
     ParseTree tree = parser.program();
 
-    System.out.println("Parse Tree");
+    System.out.println("Parse Tree: ");
 
     System.out.println(tree.toStringTree(parser));
-
     }
     catch (IOException e)
     {
