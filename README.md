@@ -10,6 +10,10 @@ Parser Project Group CRD
 2. Ryan Goodbody
 3. Connor Joyce
 
+### GitHub Link
+
+https://github.com/Conj43/CS4450-ParserProject
+
 ### Programming Language
 
 Java
@@ -42,3 +46,7 @@ This project implements a parser for a set of python langauge utilizing ANTLR 4.
 `javac -cp "C:\path\to\antlr-4.13.2-complete.jar;." PythonSubsetParserTest.java deliverable1Lexer.java deliverable1Parser.java deliverable1BaseListener.java deliverable1Listener.java`
 
 `java -cp "C:\path\to\antlr-4.13.2-complete.jar;." PythonSubsetParserTest project_deliverable_1.py`
+
+
+### Java test file
+    PythonSubsetParserTest.java
