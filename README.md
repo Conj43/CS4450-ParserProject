@@ -14,6 +14,11 @@ Parser Project Group CRD
 
 Java
 
+### Project Description
+
+This project implements a parser for a set of python langauge utilizing ANTLR 4.  We used the Java extension of ANTLR so the files produced by ANTLR are java and our file for testing our parse tree is written in Java. We used ANTLR 
+4.17.2  and this is usable with JDK 17 and newer. 
+
 ### Run
 
 `antlr4 -Dlanguage=Java deliverable1.g4`
