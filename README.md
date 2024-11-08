@@ -17,7 +17,23 @@ Java
 ### Project Description
 
 This project implements a parser for a set of python langauge utilizing ANTLR 4.  We used the Java extension of ANTLR so the files produced by ANTLR are java and our file for testing our parse tree is written in Java. We used ANTLR 
-4.17.2  and this is usable with JDK 17 and newer. 
+4.13.2  and this is usable with JDK 8 and newer. 
+
+### Deliverable 1
+    Parses
+    - Arithmetic operators
+            +, -, *, /, %,
+    - Assignment operators 
+            =, +=, -=, *=, /=
+
+
+### Project Requirements
+    - JDK 8 and newer
+    - ANTLR 4.13.2
+    - used classpath for including antlr library at compile and run time
+    - can be run on MACOS, Linux, or Windows
+
+
 
 ### Run
 
