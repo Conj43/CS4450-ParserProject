@@ -17,51 +17,53 @@ public interface deliverable1Listener extends ParseTreeListener {
 	 */
 	void exitProgram(deliverable1Parser.ProgramContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Add}
-	 * labeled alternative in {@link deliverable1Parser#expression}.
+	 * Enter a parse tree produced by {@link deliverable1Parser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterAdd(deliverable1Parser.AddContext ctx);
+	void enterStatement(deliverable1Parser.StatementContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Add}
-	 * labeled alternative in {@link deliverable1Parser#expression}.
+	 * Exit a parse tree produced by {@link deliverable1Parser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitAdd(deliverable1Parser.AddContext ctx);
+	void exitStatement(deliverable1Parser.StatementContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Number}
-	 * labeled alternative in {@link deliverable1Parser#expression}.
+	 * Enter a parse tree produced by {@link deliverable1Parser#assignment}.
 	 * @param ctx the parse tree
 	 */
-	void enterNumber(deliverable1Parser.NumberContext ctx);
+	void enterAssignment(deliverable1Parser.AssignmentContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Number}
-	 * labeled alternative in {@link deliverable1Parser#expression}.
+	 * Exit a parse tree produced by {@link deliverable1Parser#assignment}.
 	 * @param ctx the parse tree
 	 */
-	void exitNumber(deliverable1Parser.NumberContext ctx);
+	void exitAssignment(deliverable1Parser.AssignmentContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Multiply}
-	 * labeled alternative in {@link deliverable1Parser#expression}.
+	 * Enter a parse tree produced by {@link deliverable1Parser#arithmeticAssignment}.
 	 * @param ctx the parse tree
 	 */
-	void enterMultiply(deliverable1Parser.MultiplyContext ctx);
+	void enterArithmeticAssignment(deliverable1Parser.ArithmeticAssignmentContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Multiply}
-	 * labeled alternative in {@link deliverable1Parser#expression}.
+	 * Exit a parse tree produced by {@link deliverable1Parser#arithmeticAssignment}.
 	 * @param ctx the parse tree
 	 */
-	void exitMultiply(deliverable1Parser.MultiplyContext ctx);
+	void exitArithmeticAssignment(deliverable1Parser.ArithmeticAssignmentContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ParenExpr}
-	 * labeled alternative in {@link deliverable1Parser#expression}.
+	 * Enter a parse tree produced by {@link deliverable1Parser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterParenExpr(deliverable1Parser.ParenExprContext ctx);
+	void enterExpression(deliverable1Parser.ExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code ParenExpr}
-	 * labeled alternative in {@link deliverable1Parser#expression}.
+	 * Exit a parse tree produced by {@link deliverable1Parser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitParenExpr(deliverable1Parser.ParenExprContext ctx);
+	void exitExpression(deliverable1Parser.ExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link deliverable1Parser#list}.
+	 * @param ctx the parse tree
+	 */
+	void enterList(deliverable1Parser.ListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link deliverable1Parser#list}.
+	 * @param ctx the parse tree
+	 */
+	void exitList(deliverable1Parser.ListContext ctx);
 }

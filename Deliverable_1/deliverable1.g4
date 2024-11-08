@@ -1,13 +1,53 @@
 grammar deliverable1;
 
-program: expression EOF;
+program: statement* EOF;
 
-expression
-    : expression '+' expression     # Add
-    | expression '*' expression     # Multiply
-    | '(' expression ')'            # ParenExpr
-    | NUMBER                        # Number
+statement
+    : assignment
+    | arithmeticAssignment
     ;
 
-NUMBER: [0-9]+;
-WS: [ \t\r\n]+ -> skip;
+assignment
+    : VARIABLE '=' expression
+    ;
+
+arithmeticAssignment
+    : VARIABLE ('+=' | '-=' | '*=' | '/=') expression
+    ;
+
+expression
+    : NUMBER
+    | STRING
+    | BOOLEAN
+    | VARIABLE
+    | list
+    | expression ('+' | '-' | '*' | '/' | '%') expression
+    ;
+
+VARIABLE
+    : [a-zA-Z_][a-zA-Z0-9_]*
+    ;
+
+NUMBER
+    : DIGIT+ ('.' DIGIT+)?
+    ;
+
+STRING
+    : '"' (~["\\] | '\\' .)* '"'
+    | '\'' (~["\\] | '\\' .)* '\''
+    ;
+
+BOOLEAN
+    : 'True'
+    | 'False'
+    ;
+
+list
+    : '[' (expression (',' expression)*)? ']'
+    ;
+
+fragment DIGIT : [0-9];
+
+WS // whitespace
+    : [ \t\r\n]+ -> skip
+    ;

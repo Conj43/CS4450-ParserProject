@@ -1,4 +1,4 @@
-// Generated from deliverable1.g4 by ANTLR 4.13.2
+// Generated from e://rgood//Documents//IMPORTANT//CODE//SchoolProjects//POPL//CS4450-ParserProject//Deliverable_1//deliverable1.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
 
-@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue", "this-escape"})
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
 public class deliverable1Parser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.13.2", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.13.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -107,14 +107,6 @@ public class deliverable1Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_program; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof deliverable1Listener ) ((deliverable1Listener)listener).enterProgram(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof deliverable1Listener ) ((deliverable1Listener)listener).exitProgram(this);
-		}
 	}
 
 	public final ProgramContext program() throws RecognitionException {
@@ -165,14 +157,6 @@ public class deliverable1Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_statement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof deliverable1Listener ) ((deliverable1Listener)listener).enterStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof deliverable1Listener ) ((deliverable1Listener)listener).exitStatement(this);
-		}
 	}
 
 	public final StatementContext statement() throws RecognitionException {
@@ -219,14 +203,6 @@ public class deliverable1Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_assignment; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof deliverable1Listener ) ((deliverable1Listener)listener).enterAssignment(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof deliverable1Listener ) ((deliverable1Listener)listener).exitAssignment(this);
-		}
 	}
 
 	public final AssignmentContext assignment() throws RecognitionException {
@@ -264,14 +240,6 @@ public class deliverable1Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_arithmeticAssignment; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof deliverable1Listener ) ((deliverable1Listener)listener).enterArithmeticAssignment(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof deliverable1Listener ) ((deliverable1Listener)listener).exitArithmeticAssignment(this);
-		}
 	}
 
 	public final ArithmeticAssignmentContext arithmeticAssignment() throws RecognitionException {
@@ -327,14 +295,6 @@ public class deliverable1Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expression; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof deliverable1Listener ) ((deliverable1Listener)listener).enterExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof deliverable1Listener ) ((deliverable1Listener)listener).exitExpression(this);
-		}
 	}
 
 	public final ExpressionContext expression() throws RecognitionException {
@@ -447,14 +407,6 @@ public class deliverable1Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_list; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof deliverable1Listener ) ((deliverable1Listener)listener).enterList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof deliverable1Listener ) ((deliverable1Listener)listener).exitList(this);
-		}
 	}
 
 	public final ListContext list() throws RecognitionException {
