@@ -38,18 +38,27 @@ This project implements a parser for a set of python langauge utilizing ANTLR 4.
     - used classpath for including antlr library at compile and run time
     - can be run on MACOS, Linux, or Windows
 
-### Run
+### Run 
 
 ```console
 antlr4 -Dlanguage=Java deliverable1.g4
 ```
-
+#### Windows 
 ```console
 javac -cp "C:\path\to\antlr-4.13.2-complete.jar;." PythonSubsetParserTest.java deliverable1Lexer.java deliverable1Parser.java deliverable1BaseListener.java deliverable1Listener.java
 ```
 
 ```console
 java -cp "C:\path\to\antlr-4.13.2-complete.jar;." PythonSubsetParserTest project_deliverable_1.py
+```
+
+#### macOS/Linux
+```console
+javac -cp .:\path\to\antlr-4.13.2-complete.jar PythonSubsetParserTest.java deliverable1Lexer.java deliverable1Parser.java deliverable1BaseListener.java deliverable1Listener.java
+```
+
+```console
+java -cp .:\path\to\antlr-4.13.2-complete.jar PythonSubsetParserTest project_deliverable_1.py
 ```
 
 ### Java test file
