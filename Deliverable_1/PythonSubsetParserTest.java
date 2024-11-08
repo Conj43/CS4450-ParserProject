@@ -34,10 +34,10 @@ public class PythonSubsetParserTest {
         ParseTree tree = parser.program(); // Replace 'start' with the appropriate rule if necessary
 
         // Print the parse tree in LISP-style format
-        // System.out.println(tree.toStringTree(parser));
+        System.out.println(tree.toStringTree(parser));
 
-        System.out.println("Parse Tree:");
-        printParseTree(tree, 0); // Start with an indentation level of 0
+        // System.out.println("Parse Tree:");
+        // printParseTree(tree, 0); // Start with an indentation level of 0
     }
 
     private static void printParseTree(ParseTree tree, int level) {
