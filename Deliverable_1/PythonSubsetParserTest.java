@@ -15,14 +15,15 @@ public class PythonSubsetParserTest {
     String file = args[0]; // python file passed as argument when running java code
     try{
     
-    CharStream input = CharStreams.fromFileName(file);  //grabs all the input from the file
+
+    CharStream input  = CharStreams.fromFileName(file);  //grabs all the data from the file
 
 
     deliverable1Lexer lexer = new deliverable1Lexer(input); //makes the lexer from the charStream
 
     CommonTokenStream stream = new CommonTokenStream(lexer);  //this gives us our tokens needed for creating the parser
 
-    deliverable1Parser parser = new deliverable1Parser(stream); 
+    deliverable1Parser parser = new deliverable1Parser(stream);
 
     ParseTree tree = parser.program();
 
