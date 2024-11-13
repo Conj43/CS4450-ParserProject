@@ -17,21 +17,38 @@ arithmeticAssignment
     ;
 
 ifStatement
-    : 'if' conditionBlock ('elif' conditionBlock)* ('else' block)?
-    ;
-
-conditionBlock
-    : '(' condition ')' block
+    : 'if' condition COLON block
+      ('elif' condition COLON block)*
+      ('else' COLON block)?
     ;
 
 block
-    : '{' statement*  '}'
+    : '{' statement* '}'
     ;
 
 condition
-    : expression comparisonOperator expression
-    | 'not' condition
-    | condition ('and' | 'or') condition
+    : logicalCondition
+    ;
+
+logicalCondition
+    : 'not' logicalCondition 
+    | expression comparisonOperator expression  
+    | logicalCondition ('and' | 'or') logicalCondition  
+    | '(' logicalCondition ')'  
+    ;
+
+expression
+    : term
+    | expression ('+' | '-' | '*' | '/' | '%') term
+    ;
+
+term
+    : NUMBER
+    | STRING
+    | BOOLEAN
+    | VARIABLE
+    | list
+    | '(' expression ')'
     ;
 
 comparisonOperator
@@ -43,21 +60,12 @@ comparisonOperator
     | '!='
     ;
 
-expression
-    : NUMBER
-    | STRING
-    | BOOLEAN
-    | VARIABLE
-    | list
-    | expression ('+' | '-' | '*' | '/' | '%') expression
-    ;
-
 VARIABLE
-    : [a-zA-Z_][a-zA-Z0-9_]*
+    : [a-zA-Z_][a-zA0-9_]*
     ;
 
 NUMBER
-    : DIGIT+ ('.' DIGIT+)?
+    : '-'? DIGIT+ ('.' DIGIT+)?
     ;
 
 STRING
@@ -76,7 +84,9 @@ list
 
 fragment DIGIT : [0-9];
 
-WS // whitespace
+COLON: ':';  
+
+WS
     : [ \t\r\n]+ -> skip
     ;
 
