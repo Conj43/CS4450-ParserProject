@@ -1,10 +1,11 @@
-grammar Deliverable2;
+grammar deliverable2;
 
 program: statement* EOF;
 
 statement
     : assignment
     | arithmeticAssignment
+    | ifStatement
     ;
 
 assignment
@@ -13,6 +14,33 @@ assignment
 
 arithmeticAssignment
     : VARIABLE ('+=' | '-=' | '*=' | '/=') expression
+    ;
+
+ifStatement
+    : 'if' conditionBlock ('elif' conditionBlock)* ('else' block)?
+    ;
+
+conditionBlock
+    : '(' condition ')' block
+    ;
+
+block
+    : '{' statement*  '}'
+    ;
+
+condition
+    : expression comparisonOperator expression
+    | 'not' condition
+    | condition ('and' | 'or') condition
+    ;
+
+comparisonOperator
+    : '<'
+    | '<='
+    | '>'
+    | '>='
+    | '=='
+    | '!='
     ;
 
 expression
