@@ -31,10 +31,10 @@ condition
     ;
 
 logicalCondition
-    : 'not' logicalCondition 
-    | expression comparisonOperator expression  
-    | logicalCondition ('and' | 'or') logicalCondition  
-    | '(' logicalCondition ')'  
+    : logicalCondition ('and' | 'or') logicalCondition       # AndOrCondition
+    | '(' logicalCondition ')'                                 # ParenCondition
+    | 'not' term                                                # NotCondition
+    | expression comparisonOperator expression                  # ComparisonCondition
     ;
 
 expression
@@ -89,4 +89,3 @@ COLON: ':';
 WS
     : [ \t\r\n]+ -> skip
     ;
-
