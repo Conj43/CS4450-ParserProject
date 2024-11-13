@@ -17,13 +17,13 @@ arithmeticAssignment
     ;
 
 ifStatement
-    : 'if' condition COLON block
-      ('elif' condition COLON block)*
-      ('else' COLON block)?
+    : 'if' condition ':' block
+      ('elif' condition ':' block)*
+      ('else' ':' block)?
     ;
 
 block
-    : '{' statement* '}'
+    : ('\t' statement)*
     ;
 
 condition
@@ -31,10 +31,10 @@ condition
     ;
 
 logicalCondition
-    : logicalCondition ('and' | 'or') logicalCondition       # AndOrCondition
-    | '(' logicalCondition ')'                                 # ParenCondition
-    | 'not' term                                                # NotCondition
-    | expression comparisonOperator expression                  # ComparisonCondition
+    : logicalCondition ('and' | 'or') logicalCondition      # AndOrCondition
+    | '(' logicalCondition ')'                              # ParenCondition
+    | 'not' term                                            # NotCondition
+    | expression comparisonOperator expression              # ComparisonCondition
     ;
 
 expression
@@ -84,8 +84,6 @@ list
 
 fragment DIGIT : [0-9];
 
-COLON: ':';  
-
 WS
-    : [ \t\r\n]+ -> skip
+    : [ \r\n]+ -> skip
     ;
