@@ -20,16 +20,10 @@ Java
 
 ### Project Description
 
-This project implements a parser for a set of python langauge utilizing ANTLR 4. We used the Java extension of ANTLR so the files produced by ANTLR are java and our file for testing our parse tree is written in Java. We used ANTLR
-4.13.2 and this is usable with JDK 8 and newer.
+This project implements a parser for a set of python langauge utilizing ANTLR 4. We used the Java extension of ANTLR so the files produced by ANTLR are java and out parser is in Java.
+ANTLR 4.13.2 and this is usable with JDK 8 and newer.
 
-### Deliverable 1
 
-    Parses
-    - Arithmetic operators
-            +, -, *, /, %,
-    - Assignment operators
-            =, +=, -=, *=, /=
 
 ### Project Requirements
 
@@ -38,26 +32,38 @@ This project implements a parser for a set of python langauge utilizing ANTLR 4.
     - used classpath for including antlr library at compile and run time
     - can be run on MACOS, Linux, or Windows
 
-### Run 
+### Run to Generate Java Files Based on Grammar 
 
 ```console
 antlr4 deliverable3.g4
 ```
-#### Windows 
+
+### Compile Java Files
+
+##### Windows 
 ```console
 javac -cp "C:\path\to\antlr-4.13.2-complete.jar;." deliverable3*.java
 ```
-
+or if you have class path setup
 ```console
-grun deliverable3 program -gui < project_deliverable_3.py
+javac deliverable3*.java
 ```
-
-#### macOS/Linux
+##### macOS/Linux
 ```console
 javac -cp .:\path\to\antlr-4.13.2-complete.jar deliverable3*.java
 ```
-
+or if you have class path setup
+```console
+javac deliverable3*.java
+```
+### Run Parser on Deliverable 3 Python File
 ```console
 grun deliverable3 program -gui < project_deliverable_3.py
 ```
+
+Alternatively, run the following command to and type sample input into the terminal followed by Ctrl+D on macOS and Ctril+Z on Windows followed by an enter. This will allow you to run any input on the parser.
+```console
+grun deliverable3 program -gui
+```
+
 
