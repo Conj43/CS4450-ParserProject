@@ -1,0 +1,5 @@
+# Ignore compiled Java class files
+*.class
+
+# Ignore antlr directory and files
+/.antlr/
