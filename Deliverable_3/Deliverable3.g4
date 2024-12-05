@@ -2,14 +2,24 @@ grammar deliverable3;
 
 program: statement* EOF;
 
+COMMENT
+    : '#' ~[\r\n]* -> skip
+    ;
+    
+MULTILINE_COMMENT
+    : '\'\'\'' .*? '\'\'\'' -> skip
+    ;
+
+WS
+    : [ \r\n]+ -> skip
+    ;
+
 statement
     : assignment
     | arithmeticAssignment
     | ifStatement
-    ;
-
-TAB
-    : '   '    #three spaces for TAB
+    | whileStatement
+    | forStatement
     ;
 
 assignment
@@ -21,13 +31,25 @@ arithmeticAssignment
     ;
 
 ifStatement
-    : 'if' condition ':' '\n' TAB block
-      ('elif' condition ':' '\n' TAB block)*
-      ('else' ':' '\n' TAB block)?
+    : 'if' condition ':' block
+      ('elif' condition ':' block)*
+      ('else' ':' block)?
+    ;
+
+whileStatement
+    : 'while' condition ':' block
+    ;
+
+forStatement
+    : 'for' VARIABLE 'in' (rangeFunction | VARIABLE) ':' block
+    ;
+
+rangeFunction
+    : 'range' '(' expression (',' expression)* ')'
     ;
 
 block
-    : (TAB statement)+
+    : ('\t'+ statement)+
     ;
 
 condition
@@ -36,9 +58,9 @@ condition
 
 logicalCondition
     : logicalCondition ('and' | 'or') logicalCondition      # AndOrCondition
-    | '(' logicalCondition ')'                              # ParenCondition
-    | 'not' term                                            # NotCondition
     | expression comparisonOperator expression              # ComparisonCondition
+    | '(' logicalCondition ')'                              # ParentCondition
+    | 'not' term                                            # NotCondition
     ;
 
 expression
@@ -88,15 +110,3 @@ list
 
 fragment DIGIT : [0-9];
 
-COMMENT
-    : '#' ~[\r\n]* -> skip
-    ;
-
-
-MULTILINE_COMMENT
-    : '\'\'\'' .*? '\'\'\'' -> skip
-    ;
-
-WS
-    : [ \r\n]+ -> skip
-    ;
