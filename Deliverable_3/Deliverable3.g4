@@ -84,6 +84,15 @@ list
 
 fragment DIGIT : [0-9];
 
+COMMENT
+    : '#' ~[\r\n]* -> skip
+    ;
+
+
+MULTILINE_COMMENT
+    : '\'\'\'' .*? '\'\'\'' -> skip
+    ;
+
 WS
     : [ \r\n]+ -> skip
     ;
