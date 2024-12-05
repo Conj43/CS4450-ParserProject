@@ -8,6 +8,10 @@ statement
     | ifStatement
     ;
 
+TAB
+    : '   '    #three spaces for TAB
+    ;
+
 assignment
     : VARIABLE '=' expression
     ;
@@ -17,13 +21,13 @@ arithmeticAssignment
     ;
 
 ifStatement
-    : 'if' condition ':' block
-      ('elif' condition ':' block)*
-      ('else' ':' block)?
+    : 'if' condition ':' '\n' TAB block
+      ('elif' condition ':' '\n' TAB block)*
+      ('else' ':' '\n' TAB block)?
     ;
 
 block
-    : ('\t' statement)*
+    : (TAB statement)+
     ;
 
 condition
