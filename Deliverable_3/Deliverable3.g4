@@ -1,4 +1,4 @@
-grammar deliverable3;
+grammar Deliverable3;
 
 program: statement* EOF;
 
@@ -6,6 +6,8 @@ statement
     : assignment
     | arithmeticAssignment
     | ifStatement
+    | whileStatement
+    | forStatement
     ;
 
 assignment
@@ -22,8 +24,16 @@ ifStatement
       ('else' ':' block)?
     ;
 
+whileStatement
+    : 'while' condition ':' block
+    ;
+
+forStatement
+    : 'for' VARIABLE 'in' iterable ':' block
+    ;
+
 block
-    : ('\t' statement)*
+    : (INDENT statement+ DEDENT)+
     ;
 
 condition
@@ -31,10 +41,11 @@ condition
     ;
 
 logicalCondition
-    : logicalCondition ('and' | 'or') logicalCondition      # AndOrCondition
-    | '(' logicalCondition ')'                              # ParenCondition
-    | 'not' term                                            # NotCondition
-    | expression comparisonOperator expression              # ComparisonCondition
+    : logicalCondition ('and' | 'or') logicalCondition      
+    | '(' logicalCondition ')'                              
+    | 'not' term                                            
+    | term comparisonOperator term                          
+    | BOOLEAN                                                
     ;
 
 expression
@@ -60,8 +71,17 @@ comparisonOperator
     | '!='
     ;
 
+iterable
+    : list
+    | 'range' '(' expression (',' expression)? ')'
+    ;
+
+list
+    : '[' (expression (',' expression)*)? ']'
+    ;
+
 VARIABLE
-    : [a-zA-Z_][a-zA0-9_]*
+    : [a-zA-Z_][a-zA-Z0-9_]*
     ;
 
 NUMBER
@@ -74,12 +94,8 @@ STRING
     ;
 
 BOOLEAN
-    : 'True'
+    : 'True' 
     | 'False'
-    ;
-
-list
-    : '[' (expression (',' expression)*)? ']'
     ;
 
 fragment DIGIT : [0-9];
@@ -88,11 +104,19 @@ COMMENT
     : '#' ~[\r\n]* -> skip
     ;
 
+    ;
 
 MULTILINE_COMMENT
     : '\'\'\'' .*? '\'\'\'' -> skip
     ;
 
 WS
-    : [ \r\n]+ -> skip
+    : [ \r\n]+ -> skip;
+
+INDENT
+    : '\t'
+    ;
+
+DEDENT
+    : '\b'
     ;
