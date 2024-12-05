@@ -32,6 +32,11 @@ ANTLR 4.13.2 and this is usable with JDK 8 and newer.
     - used classpath for including antlr library at compile and run time
     - can be run on MACOS, Linux, or Windows
 
+## File Layout
+- Deliverable_1 holds the grammar file and sample python file for the first deliverable.
+- Deliverable_2 holds the grammar file and sample python file for the second deliverable.
+- Deliverable_3 holds the grammar file and sample python file for the third deliverable. This is the directory where you can run our completed parser, using the commands below.
+
 ### Run to Generate Java Files Based on Grammar 
 
 ```console
