@@ -1,6 +1,18 @@
-grammar Deliverable3;
+grammar deliverable3;
 
 program: statement* EOF;
+
+COMMENT
+    : '#' ~[\r\n]* -> skip
+    ;
+    
+MULTILINE_COMMENT
+    : '\'\'\'' .*? '\'\'\'' -> skip
+    ;
+
+WS
+    : [ \r\n]+ -> skip
+    ;
 
 statement
     : assignment
@@ -8,10 +20,6 @@ statement
     | ifStatement
     | whileStatement
     | forStatement
-    ;
-
-TAB
-    : '   '    #three spaces for TAB
     ;
 
 assignment
@@ -23,9 +31,9 @@ arithmeticAssignment
     ;
 
 ifStatement
-    : 'if' condition ':' '\n' TAB block
-      ('elif' condition ':' '\n' TAB block)*
-      ('else' ':' '\n' TAB block)?
+    : 'if' condition ':' block
+      ('elif' condition ':' block)*
+      ('else' ':' block)?
     ;
 
 whileStatement
@@ -33,11 +41,15 @@ whileStatement
     ;
 
 forStatement
-    : 'for' VARIABLE 'in' iterable ':' block
+    : 'for' VARIABLE 'in' (rangeFunction | VARIABLE) ':' block
+    ;
+
+rangeFunction
+    : 'range' '(' expression (',' expression)* ')'
     ;
 
 block
-    : (TAB statement)+
+    : ('\t'+ statement '\t'*)+
     ;
 
 condition
@@ -45,11 +57,11 @@ condition
     ;
 
 logicalCondition
-    : logicalCondition ('and' | 'or') logicalCondition      
-    | '(' logicalCondition ')'                              
-    | 'not' term                                            
-    | term comparisonOperator term                          
-    | BOOLEAN                                                
+    : logicalCondition ('and' | 'or') logicalCondition     
+    | expression comparisonOperator expression             
+    | '(' logicalCondition ')'                             
+    | 'not' term  
+    | term
     ;
 
 expression
@@ -75,17 +87,8 @@ comparisonOperator
     | '!='
     ;
 
-iterable
-    : list
-    | 'range' '(' expression (',' expression)? ')'
-    ;
-
-list
-    : '[' (expression (',' expression)*)? ']'
-    ;
-
 VARIABLE
-    : [a-zA-Z_][a-zA-Z0-9_]*
+    : [a-zA-Z_][a-zA0-9_]*
     ;
 
 NUMBER
@@ -98,29 +101,12 @@ STRING
     ;
 
 BOOLEAN
-    : 'True' 
+    : 'True'
     | 'False'
     ;
 
+list
+    : '[' (expression (',' expression)*)? ']'
+    ;
+
 fragment DIGIT : [0-9];
-
-COMMENT
-    : '#' ~[\r\n]* -> skip
-    ;
-
-    ;
-
-MULTILINE_COMMENT
-    : '\'\'\'' .*? '\'\'\'' -> skip
-    ;
-
-WS
-    : [ \r\n]+ -> skip;
-
-INDENT
-    : '\t'
-    ;
-
-DEDENT
-    : '\b'
-    ;
