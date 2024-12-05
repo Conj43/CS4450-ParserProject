@@ -10,6 +10,10 @@ statement
     | forStatement
     ;
 
+TAB
+    : '   '    #three spaces for TAB
+    ;
+
 assignment
     : VARIABLE '=' expression
     ;
@@ -19,9 +23,9 @@ arithmeticAssignment
     ;
 
 ifStatement
-    : 'if' condition ':' block
-      ('elif' condition ':' block)*
-      ('else' ':' block)?
+    : 'if' condition ':' '\n' TAB block
+      ('elif' condition ':' '\n' TAB block)*
+      ('else' ':' '\n' TAB block)?
     ;
 
 whileStatement
@@ -33,7 +37,7 @@ forStatement
     ;
 
 block
-    : (INDENT statement+ DEDENT)+
+    : (TAB statement)+
     ;
 
 condition
