@@ -66,7 +66,7 @@ javac deliverable3*.java
 grun deliverable3 program -gui < project_deliverable_3.py
 ```
 
-Alternatively, run the following command to and type sample input into the terminal followed by Ctrl+D on macOS and Ctril+Z on Windows followed by an enter. This will allow you to run any input on the parser.
+Alternatively, run the following command to and type sample input into the terminal followed by Ctrl+D on macOS and Ctrl+Z on Windows followed by an enter. This will allow you to run any input on the parser.
 ```console
 grun deliverable3 program -gui
 ```
