@@ -1,4 +1,9 @@
 // Generated from deliverable3.g4 by ANTLR 4.13.2
+
+    import java.util.Stack;
+    import java.util.ArrayList;
+    import java.util.List;
+
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
