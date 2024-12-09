@@ -20,8 +20,7 @@ Java
 
 ### Project Description
 
-This project implements a parser for a set of python langauge utilizing ANTLR 4. We used the Java extension of ANTLR so the files produced by ANTLR are java and out parser is in Java.
-ANTLR 4.13.2 and this is usable with JDK 8 and newer.
+This project implements a parser for a subset of the Python language using ANTLR 4. The parser is designed to recognize grammar constructs defined in our project deliverables and produce a parse tree for given Python input code. We chose the Java target for ANTLR, so the generated parser and related classes are Java-based. Through the different deliverables we were able to implement functionality for parsing: Basic Arithmetic, Assignment Operations, Conditional Statements, Loop Constructs, Nested Structures, Lists, and Comments
 
 
 
