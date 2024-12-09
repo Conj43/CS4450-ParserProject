@@ -99,92 +99,82 @@ public class deliverable3Lexer extends Lexer {
 	}
 
 
-	    Stack<Integer> indents = new Stack<Integer>();
-	    List<org.antlr.v4.runtime.Token> pendingTokens = new ArrayList<>();
+	    Stack<Integer> indents = new Stack<Integer>(); // stack to track indent levels
+	    List<org.antlr.v4.runtime.Token> pendingTokens = new ArrayList<>(); // tokens waiting to be processed
 
 	    {
-	        indents.push(0);
+	        indents.push(0); // start with base indent at 0
 	    }
 
-	    int getIndentationCount(String whitespace) {
-	        int count = 0;
+	    int getIndentationCount(String whitespace) { // get the indentation count for a line
+	        int count = 0; 
 	        for (char ch : whitespace.toCharArray()) {
-	            if (ch == ' ' || ch == '\t') {
-	                count++;
+	            if (ch == '\t') {
+	                count++; // count tabs
 	            }
 	        }
-	        return count;
+	        return count; // return current indentation level
 	    }
 
-	    org.antlr.v4.runtime.Token createToken(int ttype, String text) {
+	    org.antlr.v4.runtime.Token createToken(int ttype, String text) { // creating token for antlr
 	        org.antlr.v4.runtime.CommonToken token = new org.antlr.v4.runtime.CommonToken(_tokenFactorySourcePair, ttype, DEFAULT_TOKEN_CHANNEL, getCharIndex(), getCharIndex());
-	        token.setLine(getLine());
-	        token.setCharPositionInLine(getCharPositionInLine());
-	        token.setText(text);
-	        return token;
+	        token.setLine(getLine()); 
+	        token.setCharPositionInLine(getCharPositionInLine()); 
+	        token.setText(text); 
+	        return token; 
 	    }
 
 	    void handleIndentation(String newLineText) {
-	    int nextChar = _input.LA(1);
-	    StringBuilder wsBuf = new StringBuilder();
+	        int nextChar = _input.LA(1); // peek next char
+	        StringBuilder buffer = new StringBuilder(); // buffer for whitespace
 
-	    while (nextChar == ' ' || nextChar == '\t') {
-	        wsBuf.append((char)nextChar);
-	        _input.consume();
-	        nextChar = _input.LA(1);
+	        // consume whitespace chars
+	        while (nextChar == '\t') {
+	            buffer.append((char)nextChar); // add tab to buffer
+	            _input.consume(); // consume char
+	            nextChar = _input.LA(1); // peek next char
+	        }
+
+	        String ws = buffer.toString(); // get indentation whitespace
+	        int currentIndent = getIndentationCount(ws); // current indent count
+	        int previousIndent = indents.peek(); // previous indent level on stack
+
+	        if (currentIndent > previousIndent) {
+	            // check for going up 2 in indent which is illegal
+	            if (currentIndent - previousIndent > 1) { // too big jump
+	                throw new org.antlr.v4.runtime.LexerNoViableAltException(this, _input, _tokenStartCharIndex, null); // throw error
+	            }
+
+	            // if indent is okay (less than or equal to 1)
+	            indents.push(currentIndent); // push new indent level
+	            pendingTokens.add(createToken(deliverable3Parser.INDENT, ws)); // add indent token
+	        } else if (currentIndent < previousIndent) {
+	            // allow multiple dedents (ex: end of nested structure where indent goes from 2 to 0)
+	            while (!indents.isEmpty() && indents.peek() > currentIndent) {
+	                indents.pop(); // pop higher indent levels
+	                pendingTokens.add(createToken(deliverable3Parser.DEDENT, "")); // add dedent token
+	            }
+	        }
 	    }
-
-	    String ws = wsBuf.toString();
-	    int currentIndent = getIndentationCount(ws);
-	    int previousIndent = indents.peek();
-
-	    if (currentIndent > previousIndent) {
-	        // Check if indentation jumped more than one level upwards
-	        if (currentIndent - previousIndent > 1) {
-	            // Too big an indent jump - error
-
-	            throw new org.antlr.v4.runtime.LexerNoViableAltException(this, _input, _tokenStartCharIndex, null);
-	        }
-
-	        // Normal single-level indent
-	        indents.push(currentIndent);
-	        pendingTokens.add(createToken(deliverable3Parser.INDENT, ws));
-	    } else if (currentIndent < previousIndent) {
-	        // Allow multiple dedents at once without error
-	        // Dedent until we reach the new indentation level
-	        while (!indents.isEmpty() && indents.peek() > currentIndent) {
-	            indents.pop();
-	            pendingTokens.add(createToken(deliverable3Parser.DEDENT, ""));
-	        }
-	    } 
-	}
-
-
 
 	    @Override
 	    public org.antlr.v4.runtime.Token nextToken() {
 	        if (!pendingTokens.isEmpty()) {
-	            return pendingTokens.remove(0);
+	            // return pending token if available
+	            return pendingTokens.remove(0); 
 	        }
 
-	        org.antlr.v4.runtime.Token t = super.nextToken();
+	        org.antlr.v4.runtime.Token t = super.nextToken(); // get next token from super
 	        if (t.getType() == NEWLINE) {
 	            if (_input.LA(1) != org.antlr.v4.runtime.IntStream.EOF) {
-	                handleIndentation(t.getText());
+	                handleIndentation(t.getText()); // handle indentation after newline
 	                if (!pendingTokens.isEmpty()) {
+	                    // return pending indentation or dedentation token
 	                    return pendingTokens.remove(0);
 	                }
 	            }
 	        }
-	        return t;
-	    }
-
-	    @Override
-	    public void reset() {
-	        super.reset();
-	        pendingTokens.clear();
-	        indents.clear();
-	        indents.push(0);
+	        return t; // return token if no indent changes
 	    }
 
 
